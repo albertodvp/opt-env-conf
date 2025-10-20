@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: GHC ${{ matrix.ghc-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        ghc-version: ['9.12', '9.10', '9.8', '9.6', '9.4']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up GHC ${{ matrix.ghc-version }}
+        uses: haskell-actions/setup@v2
+        with:
+          ghc-version: ${{ matrix.ghc-version }}
+          cabal-version: 'latest'
+
+      - name: Build
+        run: cabal build all
+
+      - name: Verify example help output
+        shell: bash
+        run: |
+          cabal exec opt-env-conf-example -- --help | sed 's/opt-env-conf-example\.exe/opt-env-conf-example/g' > actual_help.txt
+          if diff -w --strip-trailing-cr opt-env-conf-example/opt-env-conf-example_help.golden.txt actual_help.txt; then
+            echo "Help output matches!"
+          else
+            echo "Help output differs!"
+            echo "Diff output:"
+            diff -w --strip-trailing-cr opt-env-conf-example/opt-env-conf-example_help.golden.txt actual_help.txt || true
+            exit 1
+          fi
