@@ -1,0 +1,4 @@
+packages:
+  opt-env-conf/opt-env-conf.cabal
+  opt-env-conf-example/opt-env-conf-example.cabal
+  opt-env-conf-test/opt-env-conf-test.cabal

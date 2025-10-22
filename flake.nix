@@ -145,6 +145,7 @@
         buildInputs = with pkgs; [
           zlib
           mandoc
+          cabal-install
         ] ++ self.checks.${system}.pre-commit.enabledPackages;
         shellHook = self.checks.${system}.pre-commit.shellHook;
       };

@@ -1,0 +1,59 @@
+Usage: opt-env-conf-example [--config-file FILE_PATH] COMMAND [--log-level LOG_LEVEL] [-b|--base DIRECTORY_PATH] [--payment-public-key PUBLIC_KEY --payment-secret-key FILE_PATH [--payment-currency CURRENCY]]
+
+Example opt-env-conf-based application
+
+Available settings:
+  Show this help text
+  switch: -h|--help
+
+  Output version information: 0.0.0.0
+  switch: --version
+
+  Path to the configuration file
+  option: --config-file FILE_PATH
+  env: CONFIG_FILE FILE_PATH
+
+  minimal severity of log messages
+  option: --log-level LOG_LEVEL
+  env: EXAMPLE_LOG_LEVEL LOG_LEVEL
+  config:
+    example.log-level: # or null
+      <string>
+  default: "DEBUG"
+
+  base directory for items
+  option: -b|--base DIRECTORY_PATH
+
+  cache directory
+  env: CACHE_DIRECTORY DIRECTORY_PATH
+  config:
+    cache-directory: # or null
+      <string>
+
+  Public key
+  option: --payment-public-key PUBLIC_KEY
+  env: EXAMPLE_PAYMENT_PUBLIC_KEY PUBLIC_KEY
+  config:
+    example.payment.public-key: # or null
+      <string>
+
+  Secret key
+  option: --payment-secret-key FILE_PATH
+  env: EXAMPLE_PAYMENT_SECRET_KEY FILE_PATH
+  config:
+    example.payment.secret-key: # or null
+      <string>
+
+  Currency
+  option: --payment-currency CURRENCY
+  env: EXAMPLE_PAYMENT_CURRENCY CURRENCY
+  config:
+    example.payment.currency: # or null
+      <string>
+
+Available commands:
+  create   Create
+  read     Read  
+  update   Update
+  delete   Delete
+
