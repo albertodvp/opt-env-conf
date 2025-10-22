@@ -29,7 +29,16 @@ jobs:
       - name: Build
         run: cabal build all
 
+      - name: Test
+        run: cabal test all
+
       - name: Verify example help output
+        shell: bash
         run: |
           cabal run opt-env-conf-example -- --help > actual_help.txt
-          diff opt-env-conf-example/opt-env-conf-example_help.golden.txt actual_help.txt
+          if diff -w --strip-trailing-cr opt-env-conf-example/opt-env-conf-example_help.golden.txt actual_help.txt; then
+            echo "Help output matches!"
+          else
+            echo "Help output differs!"
+            exit 1
+          fi
