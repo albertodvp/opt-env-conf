@@ -1,4 +1,6 @@
-xample opt-env-conf-based application
+Usage: opt-env-conf-example [--config-file FILE_PATH] COMMAND [--log-level LOG_LEVEL] [-b|--base DIRECTORY_PATH] [--payment-public-key PUBLIC_KEY --payment-secret-key FILE_PATH [--payment-currency CURRENCY]]
+
+Example opt-env-conf-based application
 
 Available settings:
   Show this help text
